@@ -21,6 +21,7 @@ const generateUserToken = (user: any) => {
 router.post('/register', validateData(createUserSchema), async (req, res) => {
   try {
     const data = req.cleanBody;
+    console.log('Datos recibidos:', data);
     data.password = await bcrypt.hash(data.password, 10);
 
     const [user] = await db.insert(usersTable).values(data).returning();
